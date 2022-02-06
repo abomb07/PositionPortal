@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**
+ * Adam Bender
+ * CST452 Mark Reha
+ * 2/6/22
+ * User Data layer
+ **/
+
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -49,6 +56,11 @@ namespace PositionPortal.Models.Data
             return res;
         }
 
+        /// <summary>
+        /// Delete user by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool DeleteUser(int id)
         {
             bool success = false;
@@ -80,7 +92,7 @@ namespace PositionPortal.Models.Data
         }
 
         /// <summary>
-        /// Insert record into db table
+        /// Insert record into USER db table
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>

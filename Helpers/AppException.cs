@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**
+ * Adam Bender
+ * CST452 Mark Reha
+ * 2/6/22
+ * Custom exception handler
+ **/
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -6,8 +13,7 @@ using System.Threading.Tasks;
 
 namespace PositionPortal.Helpers
 {
-    // Custom exception class for throwing application specific exceptions (e.g. for validation) 
-    // that can be caught and handled within the application
+    // Custom exception class for throwing application specific exceptions that can be caught and handled within the application
     public class AppException : Exception
     {
         public AppException() : base() { }

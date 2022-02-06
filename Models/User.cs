@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**
+ * Adam Bender
+ * CST452 Mark Reha
+ * 2/6/22
+ * User Model
+ **/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +28,10 @@ namespace PositionPortal.Models
         }
         public User()
         {
-
+            Id = 0;
+            Email = string.Empty;
+            Password = string.Empty;
+            FirstName = string.Empty;
         }
     }
 }

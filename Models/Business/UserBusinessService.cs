@@ -1,4 +1,11 @@
-﻿using PositionPortal.Models.Data;
+﻿/**
+ * Adam Bender
+ * CST452 Mark Reha
+ * 2/6/22
+ * User Business Layer
+ **/
+
+using PositionPortal.Models.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
