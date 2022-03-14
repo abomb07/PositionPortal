@@ -47,6 +47,14 @@
               "target": "Package",
               "version": "[3.1.22, )"
             },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.23, )"
+            },
+            "ServiceStack.Text": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.3, )"

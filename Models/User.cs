@@ -28,10 +28,6 @@ namespace PositionPortal.Models
         }
         public User()
         {
-            Id = 0;
-            Email = string.Empty;
-            Password = string.Empty;
-            FirstName = string.Empty;
         }
     }
 }

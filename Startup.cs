@@ -31,7 +31,7 @@ namespace PositionPortal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -72,6 +72,7 @@ namespace PositionPortal
             });
 
             services.AddScoped<UserBusinessService, UserBusinessService>();
+            services.AddScoped<PositionBusinessService, PositionBusinessService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
