@@ -2,18 +2,18 @@
 Adam Bender
 CST452 Mark Reha
 2/6/22
-Home page
+Stock page
 -->
 
 <template>
   <div>
     <h1>Hi {{account.user.firstName}}!</h1>
-    <h3>Here are all your open positions:</h3>
+    <h3>Here are all your open stock positions:</h3>
     <div>
-      <span v-if="positions.error" class="text-danger">ERROR: {{positions.error}}</span>
-      <ul v-if="positions.items">
-        <li v-for="user in positions.items" :key="user">
-          {{user}}
+      <span v-if="stocks.error" class="text-danger">ERROR: {{stocks.error}}</span>
+      <ul v-if="stocks.items">
+        <li v-for="cry in stocks.items" :key="cry">
+          <a @click="getQuote({userid: account.user.id, quoteName: cry, quoteType: 1})">{{cry}}</a>
         </li>
       </ul>
     </div>
@@ -21,10 +21,7 @@ Home page
       <router-link to="/addposition">Add More</router-link>
     </p>
     <p>
-      <router-link to="/stocks">View Stocks</router-link>
-    </p>
-    <p>
-      <router-link to="/crypto">View Crypto</router-link>
+      <router-link to="/">Back</router-link>
     </p>
     <p>
       <router-link to="/login">Logout</router-link>
@@ -38,20 +35,18 @@ export default {
   computed: {
     ...mapState({
       account: state => state.account,
-      positions: state => state.positions.all,
-      positionsDetail: state => state.positionsDetail.all
+      stocks: state => state.stocks.all
     })
   },
   created () {
     this.getAll(this.account.user.id);
-    this.getTotalQuote(this.account.user.id);
   },
   methods: {
-    ...mapActions('positions', {
+    ...mapActions('stocks', {
       getAll: 'getAll',
     }),
     ...mapActions('positionsDetail', {
-      getTotalQuote: 'getTotalQuote',
+      getQuote: 'getQuote',
     })
   }
 };
