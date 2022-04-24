@@ -21,8 +21,13 @@ Register page
             </div>
             <div class="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" v-model="user.password" v-validate="{ required: true, min: 6 }" name="password" class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }" />
+                <input type="password" v-model="user.password" v-validate="{ required: true, min: 6 }" id="password" name="password" class="form-control" :class="{ 'is-invalid': submitted && errors.has('password') }" />
                 <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control"/>
+                <span id='messagePass'></span>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" :disabled="status.registering">Register</button>
@@ -35,6 +40,7 @@ Register page
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import $ from 'jquery'
 
 export default {
     data () {
@@ -60,6 +66,14 @@ export default {
                 }
             });
         }
-    }
+    },
+    mounted(){ $('#password, #confirm_password').on('keyup', function () {
+      if ($('#password').val() == $('#confirm_password').val()) {
+        $('#messagePass').html('Matching').css('color', 'green');
+      } else
+        $('#messagePass').html('Not Matching').css('color', 'red');
+    })}
 };
+
+
 </script>

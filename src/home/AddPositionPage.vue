@@ -8,10 +8,10 @@ Add Position page
 <template>
   <div>
     <h2 style="text-align: center;">Add Position</h2>
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmit" novalidate="true">
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" v-model="position.name" v-validate="'required'" name="name" class="form-control" :class="{ 'is-invalid': submitted && errors.has('name') }" />
+        <input type="text" v-model="position.name" v-validate="'required|alpha'" name="name" class="form-control" :class="{ 'is-invalid': submitted && errors.has('name') }" />
         <div v-if="submitted && errors.has('name')" class="invalid-feedback">{{ errors.first('name') }}</div>
       </div>
       <div class="form-group">
@@ -24,12 +24,12 @@ Add Position page
       </div>
       <div class="form-group">
         <label for="quantity">Quantity (enter negative number for a sell)</label>
-        <input type="text" v-model="position.quantity" v-validate="{ required: true }" name="quantity" class="form-control" :class="{ 'is-invalid': submitted && errors.has('quantity') }" />
+        <input type="text" v-model="position.quantity" v-validate="'required|decimal:4'" name="quantity" class="form-control" :class="{ 'is-invalid': submitted && errors.has('quantity') }" />
         <div v-if="submitted && errors.has('quantity')" class="invalid-feedback">{{ errors.first('quantity') }}</div>
       </div>
       <div class="form-group">
         <label for="price">Price</label>
-        <input type="text" v-model="position.price" v-validate="{ required: true }" name="price" class="form-control" :class="{ 'is-invalid': submitted && errors.has('price') }" />
+        <input type="text" v-model="position.price" v-validate="'required|decimal:4'" name="price" class="form-control" :class="{ 'is-invalid': submitted && errors.has('price') }" />
         <div v-if="submitted && errors.has('price')" class="invalid-feedback">{{ errors.first('price') }}</div>
       </div>
       <div class="form-group">
@@ -47,7 +47,16 @@ Add Position page
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import moment from 'moment'
+import all_stock_list from '../_helpers/all_stock_list.txt'
+import { Validator } from 'vee-validate'
+
+Validator.extend("alpha", {
+  getMessage: field => "Please enter a valid ticker symbol",
+  validate: value => {
+    var textByLine = all_stock_list.split('\r\n')
+    return textByLine.includes(value)
+  }
+});
 
 export default {
   data () {

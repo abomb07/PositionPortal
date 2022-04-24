@@ -18,13 +18,7 @@ Stock page
       </ul>
     </div>
     <p>
-      <router-link to="/addposition">Add More</router-link>
-    </p>
-    <p>
       <router-link to="/">Back</router-link>
-    </p>
-    <p>
-      <router-link to="/login">Logout</router-link>
     </p>
   </div>
 </template>

@@ -13,7 +13,9 @@ export const positionService = {
     getTotalQuote,
     getStock,
     getCrypto,
-    getQuote
+    getQuote,
+    getPast,
+    getRealized
 };
 
 function insert(position) {
@@ -73,6 +75,22 @@ function getQuote(userid, quoteName, quoteType) {
 
             return quote;
         });
+}
+
+function getPast(userid){
+    const requestOptions = {
+        method: 'GET'
+    };
+
+    return fetch(`${config.apiUrl}/position/past/${userid}`, requestOptions).then(handleResponse);
+}
+
+function getRealized(userid){
+    const requestOptions = {
+        method: 'GET'
+    };
+
+    return fetch(`${config.apiUrl}/position/past/total/${userid}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

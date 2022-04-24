@@ -40,6 +40,15 @@ const actions = {
                     dispatch('alert/error', error, { root: true });
                 }
             );
+    },
+    getPast({ commit }, userid) {
+        commit('getAllRequest', userid);
+
+        positionService.getPast(userid)
+            .then(
+                positions => commit('getAllSuccess', positions),
+                error => commit('getAllFailure', error)
+            );
     }
 };
 

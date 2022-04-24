@@ -17,18 +17,14 @@ Home page
         </li>
       </ul>
     </div>
-    <p>
-      <router-link to="/addposition">Add More</router-link>
-    </p>
-    <p>
-      <router-link to="/stocks">View Stocks</router-link>
-    </p>
-    <p>
-      <router-link to="/crypto">View Crypto</router-link>
-    </p>
-    <p>
-      <router-link to="/login">Logout</router-link>
-    </p>
+    <h3>Summary of your account:</h3>
+    <div>
+      <span v-if="positionsDetail.quote.error" class="text-danger">ERROR: {{positionsDetail.quote.error}}</span>
+      <ul v-if="positionsDetail.quote">
+        <li>Balance: {{positionsDetail.quote.balance}}</li>
+        <li>Gain/Loss: {{positionsDetail.quote.gainLoss}}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -39,7 +35,7 @@ export default {
     ...mapState({
       account: state => state.account,
       positions: state => state.positions.all,
-      positionsDetail: state => state.positionsDetail.all
+      positionsDetail: state => state.positionsDetail
     })
   },
   created () {

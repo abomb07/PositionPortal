@@ -30,9 +30,19 @@ const actions = {
             .then(
                 quote => {
                     commit('getQuoteSuccess', quote);
+
                     router.push('/detail');
                 },
                 error => commit('getQuoteFailure', error)
+            );
+    },
+    getRealized({ commit }, userid) {
+        commit('getTotalQuoteRequest', userid);
+
+        positionService.getRealized(userid)
+            .then(
+                positionsDetail => commit('getTotalQuoteSuccess', positionsDetail),
+                error => commit('getTotalQuoteFailure', error)
             );
     }
 };
@@ -41,8 +51,8 @@ const mutations = {
     getTotalQuoteRequest(state) {
         state.all = { loading: true };
     },
-    getTotalQuoteSuccess(state, positionsDetail) {
-        state.all = { items: positionsDetail };
+    getTotalQuoteSuccess(state, quote) {
+        state.quote = quote;
     },
     getTotalQuoteFailure(state, error) {
         state.all = { error };
@@ -53,6 +63,7 @@ const mutations = {
     getQuoteSuccess(state, quote) {
         state.status = { hasQuote: true};
         state.quote = quote;
+
     },
     getQuoteFailure(state, error) {
         state.all = { error };

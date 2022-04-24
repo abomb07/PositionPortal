@@ -15,6 +15,7 @@ import AddPositionPage from "../home/AddPositionPage";
 import StockPage from "../home/StockPage";
 import CryptoPage from "../home/CryptoPage";
 import DetailPage from "../home/DetailPage";
+import PositionHistoryPage from "../home/PositionHistoryPage";
 
 Vue.use(Router);
 
@@ -28,6 +29,7 @@ export const router = new Router({
     { path: '/stocks', component: StockPage },
     { path: '/crypto', component: CryptoPage },
     { path: '/detail', component: DetailPage },
+    { path: '/history', component: PositionHistoryPage },
 
     //otherwise redirect to home
     { path: '*', redirect: '/' }
