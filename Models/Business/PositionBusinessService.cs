@@ -56,6 +56,43 @@ namespace PositionPortal.Models.Business
             return res;
         }
 
+        public List<Position> FindAllPastPos(int UserId)
+        {
+            //this block adds the quantitys of all the users positions to find if they are still open or closed
+            //quantity < 0 means the position is still open
+            var groupedByName = FindByUserId(UserId).ToLookup(x => x.Name);
+            var totalQuantity = groupedByName.ToDictionary(
+                x => x.Key,
+                x => x.Sum(x => x.Quantity)
+            );
+
+            var res = FindByUserId(UserId).Where(z => totalQuantity[z.Name] == 0).ToList();
+            return res;
+        }
+
+        public PositionDetail GetRealizedData(int UserId)
+        {
+            PositionDetail res = new PositionDetail();
+            List<Position> foo = FindAllPastPos(UserId);
+            double plus = 0;
+            double neg = 0;
+
+            foreach (var item in foo)
+            {
+                //a quantity greater than 0 represents a buy
+                //less than zero represents a sell
+                if (item.Quantity > 0)
+                {
+                    neg += item.Price * item.Quantity;
+                }else
+                {
+                    plus += Math.Abs(item.Quantity) * item.Price;
+                }
+            }
+            res.GainLoss = Math.Round(plus - neg, 2);
+            return res;
+        }
+
         /// <summary>
         /// For home page
         /// </summary>
@@ -122,6 +159,7 @@ namespace PositionPortal.Models.Business
             res.Quote = Type == 1 ? ApiHelper.GetStockQuote(Name) : ApiHelper.GetCryptoQuote(Name);
             res.Balance = Math.Round(res.Quantity * res.Quote, 2);
             res.GainLoss = Math.Round(res.Balance - res.CostBasis, 2);
+            res.Type = Type;
             return res;
         }
 
@@ -142,6 +180,8 @@ namespace PositionPortal.Models.Business
                 res.Balance += foo.Balance;
                 res.GainLoss += foo.GainLoss;
             }
+            res.Balance = Math.Round(res.Balance, 2);
+            res.GainLoss = Math.Round(res.GainLoss, 2);
             return res;
         }
     }

@@ -20,5 +20,6 @@ namespace PositionPortal.Models
         public double Balance { get; set; }
         public double CostBasis { get; set; }
         public double GainLoss { get; set; }
+        public int Type { get; set; }
     }
 }

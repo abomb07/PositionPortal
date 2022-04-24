@@ -61,6 +61,29 @@ namespace PositionPortal.Controllers
             return Ok(res);
         }
 
+        /// <summary>
+        /// Returns list of closed positions
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        [HttpGet("past/{userid}")]
+        public IActionResult FindAllPastPos(int userid)
+        {
+            var res = pbs.FindAllPastPos(userid);
+            return Ok(res);
+        }
+
+        /// <summary>
+        /// Returns calculated amount of realized gain/loss in closed positions
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        [HttpGet("past/total/{userid}")]
+        public IActionResult GetRealizedData(int userid)
+        {
+            var res = pbs.GetRealizedData(userid);
+            return Ok(res);
+        }
 
         /// <summary>
         /// Returns list of all open stock positions
